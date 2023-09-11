@@ -10,26 +10,37 @@
     />
     <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css" />
+    <script
+  src="https://code.jquery.com/jquery-3.7.1.min.js"
+  integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+  crossorigin="anonymous"></script>
   </head>
-  <body>
-    <div class="container">
-      <h3>Điền vào chỗ trống phép tính hoặc số đúng</h3>
-      <div id="time" style="width: 100%"></div>
-      <div id="question"></div>
-      <button id="submit-btn">Kiểm tra</button>
-      <h3>Thời gian: <span id="thoigian">10</span></h3>
-      <h3>Điểm số: <span id="ds">0</span></h3>
+  <body style="background: linear-gradient(35deg, red, purple);">
+  
+    <div class="main">
+        <h1 style="color: rgb(255, 255, 255);margin: 20px; text-align: center;">Đây là game tập tính toán cho học sinh tiểu học.</h3>
+              
+              <label for="fname">Nhập tên của bạn:</label><br>
+              <input height="150px" type="text" id="name" name="fname"><br>
 
-      <p id="error-msg">Some Demo Error Message</p>
+            <select id="khoilop">
+                <option  value="0" size="4">Chọn khối lớp</option>
+                <option value="1" onselect="setkl(2);">Lớp 2</option>
+                <option value="2">Lớp 3</option>
+                <option value="3">Lớp 4</option>
+              </select>
+              <select id="capdo">
+                <option   value="0">Chọn cấp độ</option>
+                <option value="1">Dễ ( 90 giây )</option>
+                <option value="2">Vừa ( 60 giây )</option>
+                <option value="3">Khó ( 30 giây )</option>
+              </select>
+
+              </div>
+              <button id="start-bn">Tiếp tục</button>
     </div>
-    <div class="controls-container">
-      <p id="result"></p>
-      <button id="start-btn">Start Game</button>
-     
-    </div>
-    <audio id="correct"><source src="https://easymath.netlify.app/correct.mp3"></audio>
-    <audio id="wrong"><source src="https://easymath.netlify.app/wrong.mp3"></audio>
+   
     <!-- Script -->
-    <script src="script.js"></script>
+    <script src="script1.js"></script>
   </body>
 </html>

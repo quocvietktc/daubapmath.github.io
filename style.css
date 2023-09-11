@@ -5,7 +5,7 @@
   font-family: "Poppins", sans-serif;
 }
 body {
-  background-color: #f4c531;
+  
 }
 .container {
   background-color: #ffffff;
@@ -26,7 +26,7 @@ body {
   line-height: 1.8em;
 }
 .container #submit-btn {
-  font-size: 10px;
+  font-size: 20px;
   font-weight: 500;
   display: block;
   margin: 0 auto;
@@ -36,9 +36,9 @@ body {
   outline: none;
   cursor: pointer;
   color: #23234c;
-  padding: 0.6em 2em;
-  width: 93px;
-  height: 26px;
+  /* padding: 0.6em 2em; */
+  width: 130px;
+  height: 50px;
 }
 #error-msg {
   text-align: center;
@@ -102,7 +102,7 @@ body {
   top: 0;
 }
 #start-btn {
-  font-size: 1.2em;
+  font-size: 17px;
   font-weight: 500;
   background-color: #ffffff;
   color: #23234c;
@@ -113,6 +113,20 @@ body {
   border-radius: 0.3em;
   width: 120px;
   height: 80px;
+}
+#start-bn {
+  float: right;
+  font-size: 20px;
+  font-weight: 10;
+  background-color: #0252ff;
+  color: #9fff20;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  margin: 5px 10px 5px 10px;
+  border-radius: 0.3em;
+  width: 100px;
+  height: 50px;
 }
 #result {
   margin-right: 50px;
@@ -127,6 +141,25 @@ body {
 .hide {
   display: none;
 }
+select {
+  width: 200px;
+  font-size: 20px;
+  height: 50px;
+  text-align: center;
+  margin: 10px 50px;
+}
+input {
+  font-size: 20px;
+  margin: 10px 10px;
+  width: 350px;
+  height: 45px;
+}
+label {
+  margin: 10px;
+}
+
+
+
 @media screen and (max-width: 992px) {
   body{
       font-size: 25px;

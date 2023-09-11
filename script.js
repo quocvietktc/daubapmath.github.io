@@ -8,18 +8,70 @@ const errorMessage = document.getElementById("error-msg");
 let answerValue;
 let operatorQuestion;
 let diemso=document.getElementById("ds");
-let ds = parseInt(diemso.innerHTML);
-let time = 60;
+let fname = localStorage.name;
+let khoilop = localStorage.khoilop;
+let capdo = localStorage.capdo;
+let t_time=0;
+let da = true;
+let check1=true;
+let kl = 0;
+let max_random=0;
+const ten = document.getElementById("fname");
+ten.innerHTML = fname;
+document.getElementById("aname").innerHTML=fname;
+switch (parseInt(khoilop)){
+  case 1:
+    kl=2;
+    max_random = 9;
+    break;
+  case 2:
+   kl=3;
+   max_random = 99;
+    break;
+  case 3:
+    max_random = 999;
+    kl=4;
+    break;
+  default:
+    max_random = 9;
+    kl=2;
+    break;
+}
+document.getElementById("khoilop").innerHTML = kl;
+document.getElementById("akl").innerHTML = kl;
+let cd = "";
+switch (parseInt(capdo)){
+  case 1:
+    t_time=90;
+    cd = "Dễ (90s)";
+    break;
+  case 2:
+    t_time=60;
+    cd = "Vừa (60s)";
+    break;
+  case 3:
+    t_time=30;
+    cd = "Khó (30s)";
+    break;
+  default:
+    t_time=90;
+    cd = "Dễ (90s)";
+    break;
+}
+document.getElementById("capdo").innerHTML = cd;
+document.getElementById("acd").innerHTML = cd;
+let ds = 0;
+let time = t_time;
 let run;
-    let fullTime = 60;
-    let widthTime = 0;
-  let da = true;
+let fullTime = t_time;
+let widthTime = 0;
 //Random Value Generator
 const randomValue = (min, max) => Math.floor(Math.random() * (max - min)) + min;
 
 const questionGenerator = () => {
+
   //Two random values between 1 and 20
-  let [num1, num2] = [randomValue(1, 999), randomValue(1, 999)];
+  let [num1, num2] = [randomValue(1, max_random), randomValue(1, max_random)];
 
   //For getting random operator
   let randomOperator = operators[Math.floor(Math.random() * operators.length)];
@@ -27,11 +79,17 @@ const questionGenerator = () => {
   if (randomOperator == "-" && num2 > num1) {
     [num1, num2] = [num2, num1];
   }
-  while(randomOperator == "*" && (num2>10 || num1 >10)){
-    [num1, num2] =[randomValue(1,10), randomValue(1, 10)];
+  if(khoilop<3){
+    while(randomOperator == "*" && (num2>10 || num1 >10)){
+      [num1, num2] =[randomValue(1,10), randomValue(1, 10)];
+    }
+  }else{
+    while(randomOperator == "*" && (num2>10 && num1 >10)){
+      [num1, num2] =[randomValue(1,10), randomValue(1, 10)];
+    }
   }
-  while(randomOperator == "+" && (num2+num1) >=1000){
-    [num1, num2] = [randomValue(1, 999), randomValue(1, 999)];
+  while(randomOperator == "+" && (num2+num1) >=100){
+    [num1, num2] = [randomValue(1, max_random), randomValue(1, max_random)];
   }
 
   
@@ -60,12 +118,15 @@ const questionGenerator = () => {
 
   //User Input Check
   submitBtn.addEventListener("click", () => {
-    errorMessage.classList.add("hide");
+    if(!check1) return;
+     errorMessage.classList.add("hide");
+    console.log("lda"+ds)
     let userInput = document.getElementById("inputValue").value;
     //If user input is not empty
     if (userInput) {
       //If the user guessed correct answer
       if (userInput == answerValue) {
+        console.log("la"+ds)
         ds++; 
         da=true;
         stopGame(`Tuyệt!! <span>Đây là đáp án đúng</span>`);
@@ -89,10 +150,13 @@ const questionGenerator = () => {
   });
 };
 
+
+
 //Start Game
 startBtn.addEventListener("click",func);
 function func(){
- 
+  document.querySelectorAll('h4')[0].style.display="none";
+  document.querySelectorAll('h4')[1].style.display="none";
     clearInterval(run);
   diemso.innerHTML=ds;
   operatorQuestion = false;
@@ -104,6 +168,7 @@ function func(){
   startBtn.classList.add("hide");
   questionGenerator();
   time = fullTime;
+  check1=true;
   document.getElementById("inputValue").focus();
   countDown();
 
@@ -114,7 +179,7 @@ function countDown() {
   run = setInterval(function () {
       time-=0.1;
       timeDiv.innerHTML = parseInt(time);
-      console.log("time="+ time+" va width="+ timeDiv);
+      //console.log("time="+ time+" va width="+ timeDiv);
       if(time <= 0){
           clearInterval(run);
           da=false;
@@ -124,7 +189,7 @@ function countDown() {
 }
 //Stop Game
 const stopGame = (resultText) => {
- 
+ check1 = false;
   
   if(da){
     document.getElementById("correct").play();
