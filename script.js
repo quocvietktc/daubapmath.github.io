@@ -117,8 +117,8 @@ function countDown() {
       console.log("time="+ time+" va width="+ timeDiv);
       if(time <= 0){
           clearInterval(run);
-          
-          stopGame(`Ui!! <span>Quá thời gian rồi</span>`,false);;
+          da=false;
+          stopGame(`Ui!! <span>Quá thời gian rồi</span>`);;
       }
   },100);
 }
