@@ -104,7 +104,7 @@ function func(){
   startBtn.classList.add("hide");
   questionGenerator();
   time = fullTime;
- 
+  document.getElementById("inputValue").focus();
   countDown();
 
 }
