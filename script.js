@@ -127,7 +127,7 @@ const stopGame = (resultText) => {
  
   
   if(da){
- 
+    document.getElementById("correct").play();
     result.innerHTML = resultText+ "</br>Điểm số của bạn hiện tại là: "+ds;
     var delayInMilliseconds = 1000; //1 second
     startBtn.innerText = "Tiếp tục";
@@ -140,6 +140,7 @@ setTimeout(function() {
   //your code to be executed after 1 second
 }, delayInMilliseconds);
   }else{
+    document.getElementById("wrong").play();
     result.innerHTML = resultText+ "</br>Trò chơi kết thúc với điểm số: "+ds;
     startBtn.innerText = "Chơi lại.";
     controls.classList.remove("hide");
