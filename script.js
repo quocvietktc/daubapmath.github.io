@@ -9,9 +9,9 @@ let answerValue;
 let operatorQuestion;
 let diemso=document.getElementById("ds");
 let ds = parseInt(diemso.innerHTML);
-let time = 30;
+let time = 60;
 let run;
-    let fullTime = 30;
+    let fullTime = 60;
     let widthTime = 0;
   let da = true;
 //Random Value Generator
