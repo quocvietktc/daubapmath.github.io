@@ -387,11 +387,12 @@ const stopGame = (resultText) => {
   if(da){
     document.getElementById("correct").play();
     result.innerHTML = resultText+ "</br>Điểm số của bạn hiện tại là: "+localStorage.diemso;
+    clearInterval(run);
     startBtn.innerText = "Tiếp tục";
     controls.classList.remove("hide");
     startBtn.classList.remove("hide");
-    
-    if(parseInt(ds)==diem_nhanthuong) { 
+    let cachediem = localStorage.diemso;
+    if(parseInt(cachediem)==diem_nhanthuong) { 
       localStorage.diemso=diem_nhanthuong;
       alert("Bạn đã đủ "+diem_nhanthuong+" điểm, bạn có thể đổi "+diem_nhanthuong+" điểm này thành 1 vòng quay may mắn. Bạn có 1phút để quay nhận thưởng và quay lại chơi game nhé.","Chúc mừng");
       
