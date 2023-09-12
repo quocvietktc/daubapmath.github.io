@@ -11,6 +11,7 @@ let diemso=document.getElementById("ds");
 let fname = localStorage.name;
 let khoilop = localStorage.khoilop;
 let capdo = localStorage.capdo;
+localStorage.diem=0;
 let t_time=0;
 let da = true;
 let check1=true;
@@ -115,7 +116,12 @@ const questionGenerator = () => {
     answerValue = solution;
     question.innerHTML = `${num1} ${randomOperator} ${num2} = <input type="number" id="inputValue" placeholder="?"\>`;
   }
-
+  //Enter to check ket qua
+  document.addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+        submitBtn.click();
+    }
+});
   //User Input Check
   submitBtn.addEventListener("click", () => {
     if(!check1) return;
@@ -129,6 +135,7 @@ const questionGenerator = () => {
         console.log("la"+ds)
         ds++; 
         da=true;
+        localStorage.diem= ds;
         stopGame(`Tuyệt!! <span>Đây là đáp án đúng</span>`);
       }
       //If user inputs operator other than +,-,*
@@ -150,7 +157,23 @@ const questionGenerator = () => {
   });
 };
 
-
+//check phan thuong
+let checkpt = setInterval(function () {
+  ds = localStorage.diemso;
+  diemso.innerHTML=ds;
+ var sopt = localStorage.sophanthuong;
+ localStorage.diemso = ds;
+ if(sopt>0){
+  const txt_phanthuong = document.getElementById("phanthuong");
+  var txt = localStorage.phanthuong1;
+  for (let i = 1; i < sopt; i++) {
+    var a = i+1;
+    txt+=","+localStorage.getItem("phanthuong"+a);
+  }
+  txt_phanthuong.style.display ="block";
+  txt_phanthuong.innerHTML = "Phần thưởng là: "+ txt;
+ }
+},100);
 
 //Start Game
 startBtn.addEventListener("click",func);
@@ -198,6 +221,14 @@ const stopGame = (resultText) => {
     startBtn.innerText = "Tiếp tục";
     controls.classList.remove("hide");
     startBtn.classList.remove("hide");
+    if(ds==30) { 
+      localStorage.diemso=30;
+      alert("Bạn đã đủ 30điểm, bạn có thể đổi 30điểm này thành 1 vòng quay may mắn. Bạn có 1phút để quay nhận thưởng và quay lại chơi game nhé.","Chúc mừng");
+      
+      popupWindow = window.open('vongquay/index.html', 'name', 'width=300,height=350');
+      popupWindow.focus();
+      delayInMilliseconds = 60000;
+    }
     time = fullTime;
 setTimeout(function() {
  
@@ -205,6 +236,7 @@ setTimeout(function() {
   //your code to be executed after 1 second
 }, delayInMilliseconds);
   }else{
+    localStorage.diem=0;
     document.getElementById("wrong").play();
     result.innerHTML = resultText+ "</br>Trò chơi kết thúc với điểm số: "+ds;
     startBtn.innerText = "Chơi lại.";

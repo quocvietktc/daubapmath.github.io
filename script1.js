@@ -10,6 +10,7 @@ startBtn.addEventListener("click", () => {
     localStorage.setItem('name', name);
     localStorage.setItem('khoilop', khoilop);
     localStorage.setItem('capdo', capdo);
+    localStorage.setItem('sophanthuong',0);
     window.location.href = "game.html";
 
 
