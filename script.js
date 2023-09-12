@@ -11,7 +11,7 @@ let diemso=document.getElementById("ds");
 let fname = localStorage.name;
 let khoilop = localStorage.khoilop;
 let capdo = localStorage.capdo;
-localStorage.diemso=0;
+
 let t_time=0;
 let da = true;
 let check1=true;
@@ -59,8 +59,8 @@ switch (parseInt(capdo)){
   case 3:
     diem_nhanthuong=15;
     check_kho=13;
-    t_time=60;
-    cd = "Khó (60s)";
+    t_time=45;
+    cd = "Khó (45s)";
     break;
   default:
     t_time=120;
@@ -155,7 +155,13 @@ const questionGenerator = () => {
 
   //For getting random operator
    randomOperator = operators[Math.floor(Math.random() * operators.length)];
-
+  if(randomOperator=="+" || operatorQuestion =="*"){
+    if(num1==0 && num2==0){
+      [num1, num2] = [randomValue(1, max_random), randomValue(1, max_random)];
+    }else if(num1==2 && num2==2){
+      [num1, num2] = [randomValue(1, max_random), randomValue(1, max_random)];
+    }
+  }
   if (randomOperator == "-" && num2 > num1) {
     [num1, num2] = [num2, num1];
   }
@@ -340,7 +346,7 @@ function func(){
   document.querySelectorAll('h4')[0].style.display="none";
   document.querySelectorAll('h4')[1].style.display="none";
     clearInterval(run);
-  
+  time = fullTime;
   operatorQuestion = false;
   answerValue = "";
   errorMessage.innerHTML = "";
@@ -381,7 +387,6 @@ const stopGame = (resultText) => {
   if(da){
     document.getElementById("correct").play();
     result.innerHTML = resultText+ "</br>Điểm số của bạn hiện tại là: "+localStorage.diemso;
-    var delayInMilliseconds = 1000; //1 second
     startBtn.innerText = "Tiếp tục";
     controls.classList.remove("hide");
     startBtn.classList.remove("hide");
@@ -392,16 +397,18 @@ const stopGame = (resultText) => {
       
       popupWindow = window.open('vongquay/index.html', 'name', 'width=300,height=350');
       popupWindow.focus();
-      delayInMilliseconds = 60000;
     }
-    time = fullTime;
-setTimeout(function() {
- 
-  func();
-  //your code to be executed after 1 second
-}, delayInMilliseconds);
+    
+
   }else{
-    localStorage.diem=0;
+    let cachediem = localStorage.diemso;
+    if(capdo==3){
+      localStorage.diemso= parseInt(cachediem)-1;
+      ds = ds-1;
+    }else{
+      localStorage.diemso= parseInt(cachediem)-2;
+      ds = ds-2;
+    }
     document.getElementById("wrong").play();
     result.innerHTML = resultText+ "</br>Trò chơi kết thúc với điểm số: "+ds;
     startBtn.innerText = "Chơi lại.";
@@ -409,12 +416,7 @@ setTimeout(function() {
     startBtn.classList.remove("hide");
     da=false
     //alert("Trò chơi kết thúc với điểm số: "+ds + ". Chơi lại?");
-    var delayInMilliseconds = 1500; //1 second
-    setTimeout(function() {
- 
-      location.reload();
-      //your code to be executed after 1 second
-    }, delayInMilliseconds)
+   
    
   }
   
