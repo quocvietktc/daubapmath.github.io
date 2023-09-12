@@ -11,7 +11,7 @@ let diemso=document.getElementById("ds");
 let fname = localStorage.name;
 let khoilop = localStorage.khoilop;
 let capdo = localStorage.capdo;
-localStorage.diem=0;
+localStorage.diemso=0;
 let t_time=0;
 let da = true;
 let check1=true;
@@ -19,6 +19,7 @@ let kl = 0;
 let max_random=0;
 const ten = document.getElementById("fname");
 ten.innerHTML = fname;
+
 document.getElementById("aname").innerHTML=fname;
 switch (parseInt(khoilop)){
   case 1:
