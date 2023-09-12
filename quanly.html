@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quản lý Math Game</title>
+    <!-- Google Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css" />
+    <link rel='stylesheet' href='vongquay/css/sweetalert.css'>
+    <link rel='stylesheet' href='vongquay/css/custom.css'>
+    <script type="text/javascript" src="vongquay/js/Winwheel.min.js"></script>
+    <script type="text/javascript" src="vongquay/js/TweenMax.min.js"></script>
+    <script src='vongquay/js/sweetalert-dev.js'></script>
+    <script
+  src="https://code.jquery.com/jquery-3.7.1.min.js"
+  integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+  crossorigin="anonymous"></script>
+  </head>
+  <body style="background: linear-gradient(35deg, red, purple);">
+  
+    <div class="main">
+        <h1 style="color: rgb(255, 255, 255);margin: 20px; text-align: center;font-size: 40px;">Thông tin về người chơi.</h3>
+              
+              <label style="font-size: 20px" for="fname">Tên người chơi: <span id="ten" style="color: blue;">Viet</span></label><br>
+              <label style="font-size: 20px" for="fname">Khối lớp: <span id="khoilop" style="color: blue;">2</span></label><br>
+              <label style="font-size: 20px" for="fname">Cấp độ: <span id="capdo" style="color: blue;">dễ</span></label><br>
+              <label style="font-size: 20px" for="fname">Số phần thưởng: <span id="so_pt" style="color: blue;">5</span></label><br>
+              <label style="font-size: 20px" for="fname">Phần thưởng: <span id="phanthuong" style="color: blue;">Bimbim</span></label><br>
+             
+
+           
+              <button id="start-bn" style="width: 240px;">Reset phần thưởng</button>
+    </div>
+   
+    <!-- Script -->
+    <script>
+    const startBtn = document.getElementById("start-bn");
+    startBtn.addEventListener("click",func);
+
+    let fname = localStorage.name;
+    let khoilop = localStorage.khoilop;
+    let capdo = localStorage.capdo;
+    const ten = document.getElementById("ten");
+ten.innerHTML = fname;
+let diem_nhanthuong=0;
+switch (parseInt(khoilop)){
+  case 1:
+    kl=2;
+   
+    break;
+  case 2:
+   kl=3;
+  
+    break;
+  case 3:
+   
+    kl=4;
+    break;
+  default:
+ 
+    kl=2;
+    break;
+}
+document.getElementById("khoilop").innerHTML = kl;
+let cd = "";
+let t_time=0;
+switch (parseInt(capdo)){
+  case 1:
+    t_time=90;
+    diem_nhanthuong=50;
+    cd = "Dễ (90s)";
+    break;
+  case 2:
+    t_time=60;
+    diem_nhanthuong=30;
+    cd = "Vừa (60s)";
+    break;
+  case 3:
+    diem_nhanthuong=15;
+    t_time=30;
+    cd = "Khó (30s)";
+    break;
+  default:
+    t_time=90;
+    diem_nhanthuong=50;
+    cd = "Dễ (90s)";
+    break;
+}
+document.getElementById("capdo").innerHTML = cd;
+var so_pt = localStorage.sophanthuong;
+document.getElementById("so_pt").innerHTML = so_pt;
+const txt_phanthuong = document.getElementById("phanthuong");
+if(parseInt(so_pt)>0){
+    var txt = localStorage.phanthuong1;
+for (let i = 1; i < so_pt; i++) {
+    var a = i+1;
+    txt+=","+localStorage.getItem("phanthuong"+a);
+
+}
+txt_phanthuong.innerHTML = txt;
+}else {
+    txt_phanthuong.innerHTML = "Chưa nhận được phần thưởng nào."
+}
+ 
+
+    var matkhau = "DauBap123";
+    nhappass();
+    function nhappass() {
+                  swal({
+                  title: "Nhập mật khẩu để vào trang quản lý",
+                  text: "Nhập mật khẩu để mở khoá",
+                  type: "input",
+                  showCancelButton: false, // Có hiển thị nút cancel không(true = có)
+                  closeOnConfirm: false, // Có thể tắt popup khi nhấp Ok không (true = có)
+                  showLoaderOnConfirm: true, // Hiển thị loading khi nhấp vào nút Ok
+                  animation: "slide-from-top", // Như tên của nó, popup sẽ slide from top
+                  inputPlaceholder: "Nhập mật khẩu..."
+              },
+              function(inputValue) {
+                  if (inputValue === false) return false;
+      
+                  if (inputValue !== matkhau) {
+                      setTimeout(function() {
+                          swal.showInputError("Mật khẩu sai, vui lòng nhập lại!");
+                      }, 2000);
+                      return false
+                  }
+                  setTimeout(function() {
+                      swal("Mở khoá thành công!", "Hah", "success");
+                  }, 2000);
+              });
+      }
+      function func(){
+        localStorage.sophanthuong=0;
+      }
+
+
+    </script>
+  </body>
+</html>
