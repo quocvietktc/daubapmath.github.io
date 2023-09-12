@@ -65,6 +65,7 @@ switch (parseInt(capdo)){
     break;
 }
 document.getElementById("diem_nt").innerHTML = diem_nhanthuong;
+localStorage.diem_nhanthuong = diem_nhanthuong;
 document.getElementById("capdo").innerHTML = cd;
 document.getElementById("acd").innerHTML = cd;
 let ds = 0;
@@ -143,6 +144,7 @@ const questionGenerator = () => {
         da=true;
         let cachediem = localStorage.diemso;
         localStorage.diemso= parseInt(cachediem)+1;
+        ds++;
         stopGame(`Tuyệt!! <span>Đây là đáp án đúng</span>`);
       }
       //If user inputs operator other than +,-,*
@@ -229,9 +231,9 @@ const stopGame = (resultText) => {
     controls.classList.remove("hide");
     startBtn.classList.remove("hide");
     
-    if(ds==30) { 
-      localStorage.diemso=30;
-      alert("Bạn đã đủ 30điểm, bạn có thể đổi 30điểm này thành 1 vòng quay may mắn. Bạn có 1phút để quay nhận thưởng và quay lại chơi game nhé.","Chúc mừng");
+    if(parseInt(ds)==diem_nhanthuong) { 
+      localStorage.diemso=diem_nhanthuong;
+      alert("Bạn đã đủ "+diem_nhanthuong+" điểm, bạn có thể đổi "+diem_nhanthuong+" điểm này thành 1 vòng quay may mắn. Bạn có 1phút để quay nhận thưởng và quay lại chơi game nhé.","Chúc mừng");
       
       popupWindow = window.open('vongquay/index.html', 'name', 'width=300,height=350');
       popupWindow.focus();

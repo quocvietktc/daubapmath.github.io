@@ -64,14 +64,19 @@
    <script>
     var matkhau = "mycode";
     var diem = localStorage.diemso;
-    
+    var diem_nhanthuong = localStorage.diem_nhanthuong;
+    if(diem<diem_nhanthuong){
+      nhappass();
+
+
+    }
     var solanquay =1;
     
-    localStorage.diemso = diem-30;
+    
       // Sau khi load trang sẽ yêu cầu nhập mật khẩu
       function nhappass() {
                   swal({
-                  title: "Vòng quay bị khoá!",
+                  title: "Vòng quay bị khoá vì bạn chưa đủ điểm để nhận thưởng. Đừng ăn gian như thế.",
                   text: "Nhập mật khẩu để mở khoá vòng quay:",
                   type: "input",
                   showCancelButton: false, // Có hiển thị nút cancel không(true = có)
@@ -324,7 +329,7 @@ $( ".lammoipopupnhantien" ).hover(
               }
           } else { // Nếu hết lượt quay(dem = solanquay)
             votay.play();
-            localStorage.diemso = parseInt(diem)-30;
+            localStorage.diemso = 0;
             swal("Chúc mừng!", "Bạn nhận được " + indicatedSegment.text + "\nVòng quay sẽ đóng và bạn sẽ quay lại game.", "success");
              var phanthuong =localStorage.sophanthuong;
              phanthuong++;
