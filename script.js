@@ -19,7 +19,7 @@ let kl = 0;
 let max_random=0;
 const ten = document.getElementById("fname");
 ten.innerHTML = fname;
-
+let diem_nhanthuong=0;
 document.getElementById("aname").innerHTML=fname;
 switch (parseInt(khoilop)){
   case 1:
@@ -45,21 +45,26 @@ let cd = "";
 switch (parseInt(capdo)){
   case 1:
     t_time=90;
+    diem_nhanthuong=50;
     cd = "Dễ (90s)";
     break;
   case 2:
     t_time=60;
+    diem_nhanthuong=30;
     cd = "Vừa (60s)";
     break;
   case 3:
+    diem_nhanthuong=15;
     t_time=30;
     cd = "Khó (30s)";
     break;
   default:
     t_time=90;
+    diem_nhanthuong=50;
     cd = "Dễ (90s)";
     break;
 }
+document.getElementById("diem_nt").innerHTML = diem_nhanthuong;
 document.getElementById("capdo").innerHTML = cd;
 document.getElementById("acd").innerHTML = cd;
 let ds = 0;
@@ -134,9 +139,10 @@ const questionGenerator = () => {
       //If the user guessed correct answer
       if (userInput == answerValue) {
         console.log("la"+ds)
-        ds++; 
+        
         da=true;
-        localStorage.diem= ds;
+        let cachediem = localStorage.diemso;
+        localStorage.diemso= parseInt(cachediem)+1;
         stopGame(`Tuyệt!! <span>Đây là đáp án đúng</span>`);
       }
       //If user inputs operator other than +,-,*
@@ -163,7 +169,7 @@ let checkpt = setInterval(function () {
   ds = localStorage.diemso;
   diemso.innerHTML=ds;
  var sopt = localStorage.sophanthuong;
- localStorage.diemso = ds;
+ 
  if(sopt>0){
   const txt_phanthuong = document.getElementById("phanthuong");
   var txt = localStorage.phanthuong1;
@@ -182,7 +188,7 @@ function func(){
   document.querySelectorAll('h4')[0].style.display="none";
   document.querySelectorAll('h4')[1].style.display="none";
     clearInterval(run);
-  diemso.innerHTML=ds;
+  
   operatorQuestion = false;
   answerValue = "";
   errorMessage.innerHTML = "";
@@ -217,11 +223,12 @@ const stopGame = (resultText) => {
   
   if(da){
     document.getElementById("correct").play();
-    result.innerHTML = resultText+ "</br>Điểm số của bạn hiện tại là: "+ds;
+    result.innerHTML = resultText+ "</br>Điểm số của bạn hiện tại là: "+localStorage.diemso;
     var delayInMilliseconds = 1000; //1 second
     startBtn.innerText = "Tiếp tục";
     controls.classList.remove("hide");
     startBtn.classList.remove("hide");
+    
     if(ds==30) { 
       localStorage.diemso=30;
       alert("Bạn đã đủ 30điểm, bạn có thể đổi 30điểm này thành 1 vòng quay may mắn. Bạn có 1phút để quay nhận thưởng và quay lại chơi game nhé.","Chúc mừng");
